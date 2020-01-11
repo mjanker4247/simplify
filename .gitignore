@@ -1,18 +1,40 @@
+# Local specialities
 build
 build-win
 bin
-*.o
-*.obj
-*.rej
-*.orig
-*.dll
-*.h.gch
-ui_*.h
-moc_*
-Local.mak
-config.log
-config.status
-configure
 .vscode
 *.csv
 *.pdf
+
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
