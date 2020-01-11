@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1578580646 source:c:\users\jankerm\documents\x-dev\code\simplify\main.cpp
+	<iostream>
+	<cmath>
+	<utility>
+	<vector>
+	<stdexcept>
+	<fstream>
+	<sstream>
+	<string>
+
+1553270433 source:c:\users\jankerm\documents\x-dev\code\simplify\cpp_csv.cpp
+	"cpp_csv.h"
+	<fstream>
+	<string>
+	<vector>
+	<sstream>
+
+1553270433 c:\users\jankerm\documents\x-dev\code\simplify\cpp_csv.h
+	<vector>
+	<string>
+
+1570537758 source:c:\users\jankerm\documents\x-dev\code\simplify\src\sarge.cpp
+	"sarge.h"
+	<iostream>
+
+1570537758 c:\users\jankerm\documents\x-dev\code\simplify\src\sarge.h
+	<string>
+	<vector>
+	<map>
+	<memory>
+
+1578651338 source:c:\users\jankerm\documents\x-dev\code\simplify\src\main.cpp
+	<iostream>
+	<cmath>
+	<utility>
+	<vector>
+	<stdexcept>
+	<fstream>
+	<sstream>
+	<string>
+	"sarge.h"
+
