@@ -6,7 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <string>
-#include "sarge.h"
+#include "sarge.h"  // for arguments parsing
 using namespace std;
 
 typedef std::pair<double, double> Point;
@@ -139,13 +139,20 @@ int main(int argc, char** argv)
 	std::string inputfile = "points.csv";
     std::string outputfile = "points_reduced.csv";
     std::string epsilon_str = "0.1";
+    std::string separator_str = ",";
+    std::string print_str = "NO";
+    char separator = ',';
+    bool print = false;
 
 	Sarge sarge;
 
+    // Define arguments
     sarge.setArgument("h", "help", "Get help.", false);
     sarge.setArgument("i", "input", "The input file", true);
     sarge.setArgument("o", "output", "The output file", true);
     sarge.setArgument("e", "epsilon", "Distance dimension epsilon", true);
+    sarge.setArgument("s", "separator", "Data separator", true);
+    sarge.setArgument("p", "print", "Print result to screen", false);
     sarge.setDescription("Reduce number of XY coordinates by using Ramer-Douglas-Peucker algorithm.");
     sarge.setUsage("simplify <options>");
 
@@ -154,13 +161,18 @@ int main(int argc, char** argv)
         return 1;
     }
 
-    //std::cout << "Number of flags found: " << sarge.flagCount() << std::endl;
-
+    // Print help
     if (sarge.exists("help")) {
         sarge.printHelp();
         return 0;
     }
 
+    if (sarge.exists("print")) {
+        print = true;
+    }
+
+    if (!sarge.getFlag("separator", separator_str))
+        std::cout << "No separator defined. Using '" << separator << "'" << std::endl;
 
     if (!sarge.getFlag("input", inputfile))
         std::cout << "No input file defined. Using " << inputfile << std::endl;
@@ -169,18 +181,13 @@ int main(int argc, char** argv)
         std::cout << "No output file defined. Using " << outputfile << std::endl;
 
     if (!sarge.getFlag("epsilon", epsilon_str))
-        std::cout << "No epsilon defined. Using " << epsilon_str << std::endl;
+        std::cout << "No epsilon defined. Using '" << epsilon_str << "'" << std::endl;
 
     double epsilon = std::stod(epsilon_str, nullptr);
 
-
-
 	vector<vector<double>> data = parse2DCsvFile(inputfile);
 
-	//cout << "Size of data: " << data.size() << endl;
-
     for (auto l : data) {
-        //cout << "Size of l: " << l.size() << endl;
 
         if (l.size() == 2)
         {
@@ -200,11 +207,14 @@ int main(int argc, char** argv)
 	RamerDouglasPeucker(pointList, epsilon, pointListOut);
 
 	// Print to screen
-	cout << "Result" << endl;
-	for(size_t i=0;i< pointListOut.size();i++)
-	{
-		cout << pointListOut[i].first << "," << pointListOut[i].second << endl;
-	}
+    if (print)
+    {    
+        cout << "Result" << endl;
+        for(size_t i=0;i< pointListOut.size();i++)
+        {
+            cout << pointListOut[i].first << "," << pointListOut[i].second << endl;
+        }
+    }
 
 	// Write to file
     char delimiter = ',';  // by default: ','
